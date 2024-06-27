@@ -1,0 +1,72 @@
+@model IEnumerable<OrderDeliveryWebApplication.ViewModels.Models.Responses.OrderControllerResponse>
+
+@{
+    ViewData["Title"] = "Заказы";
+}
+
+<h1>Мои заказы</h1>
+
+<p>
+    <a asp-action="Create">Создать новый заказ</a>
+</p>
+<table id="ordersTable">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SenderCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SenderAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecipientCity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RecipientAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CargoWeight)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PickUpDate)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr onclick="location.href='@Url.Action($"Details", "OrderDelivery", new{Id = item.Id})'">
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SenderCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SenderAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecipientCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RecipientAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CargoWeight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PickUpDate)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+
